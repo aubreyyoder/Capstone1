@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Currency Conversion</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div id="banner" class="fixed">
+                <div class="nav-bar hidden">
+                    <a href="">Home</a>
+                    <a href="">Favorites</a>
+                    <a href="">Find a location</a>
+                </div>
+            </div>
+            <div class="hamburger" onclick="hamburgerCross(this)">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+        </header>
+        <form id="conversion-form">
+            <section class="landing">
+                <div id="js-show-me">
+                    <button id="landing-btn" type="submit">SHOW ME THE MONEY!</button>
+                </div>
+            </section>
+            <section class="select-currency hidden">
+                <div id="js-currency-exchange">
+                    <ul name="currencies">
+                    </ul>
+                </div>
+            </section>
+            <section class="amount hidden">
+                <div id="js-amount-input">
+                    <input type="number" placeholder="HOW MUCH ARE YOU CONVERTING?"></input>
+                </div>
+            </section>
+            <section class="results hidden">
+                <div id="results-page">
+                    <div id="js-conversion-results">
+                        <ul name="results" class="results-list">
+                        </ul>
+                    </div>
+                    <div id="options">
+                        <h3>FIND LOCATION</h3>
+                        <a id="bank-symbol" href=""></a>
+                        <a id="favorite-symbol" href=""></a>
+                        <a id="new-search-symbol" href=""></a> 
+                    </div>
+                </div>
+            </section>
+        </form>
+        <section class="favorites hidden">
+            <div id="favorites-page">
+                <ul id="favs-list">
+                </ul>
+            </div>
+        </section>
+        <section id="locations hidden">
+            <div id="locations-page">
+                <ul id="locations-list">
+                </ul>
+            </div>
+        </section>
+        <script src="script.js"></script>
+    </body>
+</html>
