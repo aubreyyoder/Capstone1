@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(202, 190, 190);
+    background-color: rgb(192, 188, 188);
     text-align: center;
 }
 
@@ -13,6 +13,7 @@ body {
 .hamburger {
     display: inline-block;
     float: right;
+    padding-right:50px;
 }
 
 .bar1, .bar2, .bar3 {
@@ -23,10 +24,10 @@ body {
     transition: 0.4s;
 }
   
-  .change .bar1 {
+.change .bar1 {
     -webkit-transform: rotate(-45deg) translate(-9px, 6px);
     transform: rotate(-45deg) translate(-9px, 6px);
-  }
+}
   
 .change .bar2 {
     opacity: 0;
@@ -48,23 +49,82 @@ a, button, .hamburger {
 }
 
 #landing-btn {
-    background-color: darkblue;
-    border: 2px solid rgba(26, 26, 146, 0.815);
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    text-decoration: none;
+    font-family: sans-serif;
     color: white;
-    font-size: 26px;
-    height: 80px;
-    width: 300px;
 }
 
+a span {
+    display: block;
+    background: white;
+}
 
+a span:nth-child(1),
+a span:nth-child(3) {
+    position: absolute;
+    height: 2px;
+    width: 100%;
+}
 
+a span:nth-child(2),
+a span:nth-child(4) {
+    position: absolute;
+    height: 100%;
+    width: 2px;
+}
 
+a span:nth-child(1) {
+    top: 0;
+    left: -100%;
+    transition: .2s;
+}
 
+a span:nth-child(2) {
+    top: -100%;
+    right: 0;
+    transition: .4s;
+}
 
+a span:nth-child(3) {
+    bottom: 0;
+    right: -100%;
+    transition: .6s;
+}
 
+a span:nth-child(4) {
+    bottom: -100%;
+    left: 0;
+    transition: .8s;
+}
 
+a:hover span:nth-child(1) {
+    top: 0;
+    left: 0;
+}
 
+a:hover span:nth-child(2) {
+    top: 0;
+    right: 0;
+}
 
+a:hover span:nth-child(3) {
+    bottom: 0;
+    right: 0;
+}
+
+a:hover span:nth-child(4) {
+    bottom: 0;
+    left: 0;
+}
 
 .hidden {
     display: none;
