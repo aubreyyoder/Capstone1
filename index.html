@@ -10,23 +10,25 @@
     </head>
     <body>
         <header>
-            <div id="banner" class="fixed">
-                <div class="nav-bar hidden">
-                    <a href="">Home</a>
-                    <a href="">Favorites</a>
-                    <a href="">Find a location</a>
+            <div class="mobile-nav fixed">
+                <div class="hamburger" onclick="hamburgerCross(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
                 </div>
             </div>
-            <div class="hamburger" onclick="hamburgerCross(this)">
-                <div class="bar1"></div>
-                <div class="bar2"></div>
-                <div class="bar3"></div>
+            <div class="responsive-menu fixed">
+                <ul id="nav-menu">
+                    <li><a href="">HOME</a></li>
+                    <li><a href="">FAVORITES</a></li>
+                    <li><a href="">FIND A LOCATION</a></li>
+                </ul>
             </div>
         </header>
         <form id="conversion-form">
             <section class="landing">
                 <div id="js-show-me">
-                    <a id="landing-btn" type="submit" href="#">SHOW ME THE MONEY
+                    <a id="landing-btn" class="overflow" type="submit" href="#">SHOW ME THE MONEY
                         <span></span>
                         <span></span>
                         <span></span>
@@ -36,7 +38,9 @@
             </section>
             <section class="select-currency hidden">
                 <div id="js-currency-exchange">
-                    <ul name="currencies">
+                    <ul id="old-currencies" class="currency-symbols">
+                    </ul>
+                    <ul id="new-currencies" class="currency-symbols">
                     </ul>
                 </div>
             </section>

@@ -1,6 +1,5 @@
 body {
     background-color: rgb(192, 188, 188);
-    text-align: center;
 }
 
 .fixed {
@@ -10,10 +9,41 @@ body {
     z-index: 100%;
 }
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav-menu {
+    width: 100%;
+}
+
+#nav-menu li {
+    float: left;
+}
+
+#nav-menu li a {
+    display: block;
+    color: white;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#nav-menu li:hover {
+    background-color: rgb(70, 68, 68);
+}
+
+.responsive-menu {
+    background-color: rgb(146, 143, 143);
+}
+
 .hamburger {
-    display: inline-block;
     float: right;
     padding-right:50px;
+    padding-top: 20px;
 }
 
 .bar1, .bar2, .bar3 {
@@ -50,47 +80,47 @@ a, button, .hamburger {
 
 #landing-btn {
     background: transparent;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 200px;
+    color: white;
+    font-family: sans-serif;
     height: 60px;
+    left: 50%;
     line-height: 60px;
+    position: absolute;
     text-align: center;
     text-decoration: none;
-    font-family: sans-serif;
-    color: white;
+    transform: translate(-50%, -50%);
+    top: 40%;
+    width: 200px;
 }
 
 a span {
-    display: block;
     background: white;
+    display: block;
 }
 
 a span:nth-child(1),
 a span:nth-child(3) {
-    position: absolute;
     height: 2px;
+    position: absolute;
     width: 100%;
 }
 
 a span:nth-child(2),
 a span:nth-child(4) {
-    position: absolute;
     height: 100%;
+    position: absolute;
     width: 2px;
 }
 
 a span:nth-child(1) {
-    top: 0;
     left: -100%;
+    top: 0;
     transition: .2s;
 }
 
 a span:nth-child(2) {
-    top: -100%;
     right: 0;
+    top: -100%;
     transition: .4s;
 }
 
@@ -107,18 +137,18 @@ a span:nth-child(4) {
 }
 
 a:hover span:nth-child(1) {
-    top: 0;
     left: 0;
+    top: 0;
 }
 
 a:hover span:nth-child(2) {
-    top: 0;
     right: 0;
+    top: 0;
 }
 
 a:hover span:nth-child(3) {
-    bottom: 0;
     right: 0;
+    bottom: 0;
 }
 
 a:hover span:nth-child(4) {
@@ -126,6 +156,47 @@ a:hover span:nth-child(4) {
     left: 0;
 }
 
+#js-currency-exchange {
+    display: grid | inline-grid;
+    margin: 0;
+}
+
+.currency-symbols li {
+    border: 2px solid black;
+    padding: 10px;
+}
+
 .hidden {
     display: none;
 }
+
+
+
+@media only screen and (max-width: 600px) {
+    
+    .overflow {
+        overflow: hidden;
+    }
+
+
+    
+
+
+    
+}
+
+@media only screen and (max-width: 800px) {
+    .responsive-menu {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 800px) {
+
+    .hamburger {
+        display: none;
+    }
+
+}
+
+
