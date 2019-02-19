@@ -34,16 +34,16 @@ function attachCurrencyToSymbol() {
 // Create function to display select-currency page
 function displayCurrencySelections() {
     $('.currency-symbols').append(
-        `<li><a href="USD">USD SYMBOL</a></li>
-        <li><a href="EURO">EURO SYMBOL</a></li>
-        <li><a href="GBD">GBD SYMBOL</a></li>
-        <li><a href="CAD">CAD SYMBOL</a></li>
-        <li><a href="CHF">CHF SYMBOL</a></li>
-        <li><a href="SEK">SEK SYMBOL</a></li>
-        <li><a href="MXN">MXN SYMBOL</a></li>
-        <li><a href="AUD">AUD SYMBOL</a></li>`
+        `<li class="currency"><a href="USD">USD SYMBOL</a></li>
+        <li class="currency"><a href="EUR">EUR SYMBOL</a></li>
+        <li class="currency"><a href="GBD">GBD SYMBOL</a></li>
+        <li class="currency"><a href="CAD">CAD SYMBOL</a></li>
+        <li class="currency"><a href="CHF">CHF SYMBOL</a></li>
+        <li class="currency"><a href="SEK">SEK SYMBOL</a></li>
+        <li class="currency"><a href="MXN">MXN SYMBOL</a></li>
+        <li class="currency"><a href="AUD">AUD SYMBOL</a></li>`
     );
-    $('.select-currency').removeClass('hidden');
+    $('.old-currencies').removeClass('hidden');
 }
 
 // Create function to append currency symbols to '#select-currency' page
@@ -60,7 +60,7 @@ function displayInputPage() {
 function displayDesiredCurrencySelection() {
     $('.currency-symbols').append(
         `<li><a href="USD">USD SYMBOL</a></li>
-        <li><a href="EURO">EURO SYMBOL</a></li>
+        <li><a href="EURO">EUR SYMBOL</a></li>
         <li><a href="GBD">GBD SYMBOL</a></li>
         <li><a href="CAD">CAD SYMBOL</a></li>
         <li><a href="CHF">CHF SYMBOL</a></li>
@@ -68,7 +68,7 @@ function displayDesiredCurrencySelection() {
         <li><a href="MXN">MXN SYMBOL</a></li>
         <li><a href="AUD">AUD SYMBOL</a></li>`
     );
-
+    $('.new-currencies').removeClass('hidden');
 
 }
 

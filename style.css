@@ -80,15 +80,15 @@ a, button, .hamburger {
 
 #landing-btn {
     background: transparent;
+    border: 2px solid white;
     color: white;
     font-family: sans-serif;
     height: 60px;
-    left: 50%;
+    left: 25%;
     line-height: 60px;
     position: absolute;
     text-align: center;
     text-decoration: none;
-    transform: translate(-50%, -50%);
     top: 40%;
     width: 200px;
 }
@@ -156,14 +156,24 @@ a:hover span:nth-child(4) {
     left: 0;
 }
 
-#js-currency-exchange {
-    display: grid | inline-grid;
-    margin: 0;
-}
+
 
 .currency-symbols li {
-    border: 2px solid black;
-    padding: 10px;
+    background-color: antiquewhite;
+    border: 2px solid white;
+    border-radius: 25px;
+    display: inline-block;
+    font-family: sans-serif;
+    left: 10px;
+    margin: 0 0 30px 0;
+    padding: 8%;
+    position: relative;
+    top: 150px;
+}
+
+.currency a {
+    color: rgb(66, 65, 65);
+    text-decoration: none
 }
 
 .hidden {
@@ -197,6 +207,10 @@ a:hover span:nth-child(4) {
         display: none;
     }
 
+    #landing-btn {
+        border: none;
+        transform: translate(-50%, -50%);
+    }
 }
 
 
