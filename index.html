@@ -38,15 +38,24 @@
             </section>
             <section class="select-currency">
                 <div id="js-currency-exchange">
-                    <ul class="currency-symbols old-currencies hidden">
+                    <ul class="old-currencies hidden">
                     </ul>
-                    <ul class="currency-symbols new-currencies hidden">
+                    <ul class="new-currencies hidden">
                     </ul>
                 </div>
             </section>
             <section class="amount hidden">
                 <div id="js-amount-input">
+                    <ul id="input-currency-symbol">
+                    </ul>
                     <input type="number" placeholder="HOW MUCH ARE YOU CONVERTING?"></input>
+                    <button id="submit">CONVERT</button>
+                </div>
+            </section>
+            <section class="confirmation hidden">
+                <div id="js-confirmation">
+                    <p id="confirmation-paragraph">
+                    </p>
                 </div>
             </section>
             <section class="results hidden">
