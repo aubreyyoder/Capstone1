@@ -186,6 +186,11 @@ a:hover span:nth-child(4) {
     display: none;
 }
 
+h1, h3 {
+    font-family: sans-serif;
+    color: rgb(116, 116, 228);
+}
+
 @media only screen and (max-width: 800px) {
     .responsive-menu {
         display: none;
@@ -211,6 +216,27 @@ a:hover span:nth-child(4) {
     .currency button:hover {
         background-color: rgb(117, 117, 231);
         color: white;
+    }
+
+    #js-confirmation {
+        font-size: 30px;
+        position: relative;
+        text-align: center;
+        top: 300px;
+    }
+
+    #js-confirmation button {
+        color: rgb(235, 207, 86);
+        cursor: pointer;
+        font-size: 80px;
+        height: 100px;
+        width: 200px;
+    }
+
+    #js-confirmation button:hover {
+        background-color: white;
+        border: black dotted 2px;
+        color: rgb(79, 79, 216);
     }
 }
 

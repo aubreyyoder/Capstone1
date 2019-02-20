@@ -41,15 +41,16 @@ function displayCurrencySelections() {
         `<li class="currency"><button id="EUR" value="EURO">€ (EUR)</button></li>
         <li class="currency"><button id="JAP" value="JAP">¥ (JAP)</button></li>
         <li class="currency"><button id="GBD" value="GBD">£ (GBD)</button></li>
-        <li class="currency"><button id="CAD" value="CAD">$ (CAN)</button></li>
+        <li class="currency"><button id="CAD" value="CAD">$ (CAD)</button></li>
         <li class="currency"><button id="USD" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" value="NZD">$ (NZD)</button></li>
         <li class="currency"><button id="MXN" value="MXN">$ (MEX)</button></li>
         <li class="currency"><button id="AUD" value="AUD">$ (AUD)</button></li>`
     );
     $('.old-currencies').removeClass('hidden');
-    $('button').on('click', event => {
-        const oldCurrency = $(this).value;
+    var oldCurrency = '';
+    $('button').on('click',function(event) {
+        var oldCurrency = this.value;
         console.log(oldCurrency);
         //$('.old-currencies').addClass('hidden');
         displayInputPage(oldCurrency);
@@ -65,18 +66,18 @@ function displayInputPage(oldCurrency) {
     );
     $('.amount').removeClass('hidden');
     $('#submit').on('click', event => {
-        displayDesiredCurrencySelection();
+        displayDesiredCurrencySelection(oldCurrency, exchangeAmount);
     })
 }
 
 // Create function to display desired currency page
-function displayDesiredCurrencySelection() {
+function displayDesiredCurrencySelection(oldCurrency, exchangeAmount) {
     $('.new-currencies').removeClass('hidden');
     $('.new-currencies').append(
         `<li class="currency"><button id="EUR" value="EURO">€ (EUR)</button></li>
         <li class="currency"><button id="JAP" value="JAP">¥ (JAP)</button></li>
         <li class="currency"><button id="GBD" value="GBD">£ (GBD)</button></li>
-        <li class="currency"><button id="CAD" value="CAD">$ (CAN)</button></li>
+        <li class="currency"><button id="CAD" value="CAD">$ (CAD)</button></li>
         <li class="currency"><button id="USD" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" value="NZD">$ (NZD)</button></li>
         <li class="currency"><button id="MXN" value="MXN">$ (MEX)</button></li>
@@ -85,8 +86,8 @@ function displayDesiredCurrencySelection() {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
     
-    $('button').on('click', event => {
-        const newCurrency = $(this).value;
+    $('button').on('click', function(event) {
+        const newCurrency = this.value;
         console.log(newCurrency);
         $('.new-currencies').addClass('hidden');
         displayConfirmation(oldCurrency, exchangeAmount, newCurrency);
@@ -96,21 +97,21 @@ function displayDesiredCurrencySelection() {
 // Create function to show "is this correct? Page"
 function displayConfirmation(oldCurrency, exchangeAmount, newCurrency) {
     $('.confirmation').removeClass('hidden');
-    $('#confirmation-paragraph').append(
-        `'Just to confirm:
-        You'd like to convert '${oldCurrency} ${exchangeAmount}' to '${newCurrency}'.
-        Correct?'
+    $('#confirmation-paragraph').replaceWith(
+        `<h1>JUST TO CONFIRM:<br></h1>
+        <h3>You'd like to convert "${oldCurrency} ${exchangeAmount}" to "${newCurrency}".<br>
+        CORRECT?"</h3><br>
         <button value="yes">YES</button>
         <button value="no">NO</button>`
     );
-    $('button').on('click', event => {
-        if ($(this).value == yes) {
+    console.log('paragraph replaced');
+    $('button').on('click', function(event) {
+        if (this.value == yes) {
             displayResults();
-        } else if ($(this).value == no) {
+        } else if (this.value == no) {
             alert(`YOU MUST CLICK 'YES'!!`);
         }
     })
-        displayResults();
 }
 
 // Creates a function that fetches API info for exchange rates
