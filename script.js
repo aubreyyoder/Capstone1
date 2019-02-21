@@ -85,7 +85,7 @@ function displayDesiredCurrencySelection(oldCurrency, exchangeAmount) {
     );
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
-    
+    var newCurrency = '';
     $('button').on('click', function(event) {
         const newCurrency = this.value;
         console.log(newCurrency);
@@ -98,18 +98,24 @@ function displayDesiredCurrencySelection(oldCurrency, exchangeAmount) {
 function displayConfirmation(oldCurrency, exchangeAmount, newCurrency) {
     $('.confirmation').removeClass('hidden');
     $('#confirmation-paragraph').replaceWith(
-        `<h1>JUST TO CONFIRM:<br></h1>
-        <h3>You'd like to convert "${oldCurrency} ${exchangeAmount}" to "${newCurrency}".<br>
-        CORRECT?"</h3><br>
-        <button value="yes">YES</button>
-        <button value="no">NO</button>`
+        `<h1>JUST TO CONFIRM:</h1><br>
+        <h3>You'd like to convert<h3> <br>
+        <h2 class="changing-styles">${oldCurrency} ${exchangeAmount} to ${newCurrency}</h2><br>
+        <h3>CORRECT?</h3><br>
+        <button id ="js-yes-btn" value="yes">YES</button>
+        <button id="js-no-btn" value="no">NO</button>`
     );
     console.log('paragraph replaced');
+    const yesButton = $('#js-yes-btn').val();
+    const noButton = $('#js-no-btn').val();
+    
     $('button').on('click', function(event) {
-        if (this.value == yes) {
+        if (this.value == yesButton) {
+            console.log(yesButton);
             displayResults();
-        } else if (this.value == no) {
-            alert(`YOU MUST CLICK 'YES'!!`);
+        } else if (this.value == noButton) {
+            console.log(noButton);
+            alert(`CLICK 'HOME' IN THE NAVBAR TO START OVER!!`);
         }
     })
 }

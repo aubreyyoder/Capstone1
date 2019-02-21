@@ -188,7 +188,7 @@ a:hover span:nth-child(4) {
 
 h1, h3 {
     font-family: sans-serif;
-    color: rgb(116, 116, 228);
+    color: rgba(255, 255, 255, 0.856);
 }
 
 @media only screen and (max-width: 800px) {
@@ -222,21 +222,30 @@ h1, h3 {
         font-size: 30px;
         position: relative;
         text-align: center;
-        top: 300px;
+        top: 18px;
+    }
+    #js-confirmation h1 {
+        font-size: 60px;
+    }
+
+    .changing-styles {
+        color:black;
     }
 
     #js-confirmation button {
-        color: rgb(235, 207, 86);
+        background-color: antiquewhite;
+        border: 2px dotted white;
+        border-radius: 25px;
+        color: black;
         cursor: pointer;
-        font-size: 80px;
+        font-size: 50px;
         height: 100px;
         width: 200px;
     }
 
     #js-confirmation button:hover {
-        background-color: white;
         border: black dotted 2px;
-        color: rgb(79, 79, 216);
+        color: white;
     }
 }
 
