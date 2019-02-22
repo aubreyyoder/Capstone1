@@ -5,10 +5,10 @@ function hamburgerCross(bar) {
 
 
 // For Google Places (key = apiKey)
-const accessKey = "0693228440f00bcfde2c2b8f0fa8c145";
+const apiKey = "ceWcXsB3ARU6PnLvQ6tvgKEM3Djqrm";
 
 // Get the latest foreign exchange reference rates
-const exchangeRateURL = 'http://data.fixer.io/api/convert'
+const exchangeRateURL = 'https://www.amdoren.com/api/currency.php'
 
 // Get places in Google Maps
 const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
@@ -120,7 +120,7 @@ function formatQueryParams(params) {
 function getExchangeRates() {
     console.log('...Fetching exchange rates');
     const params = {
-        'access_key': accessKey,
+        'api_key': accessKey,
         'from': oldCurrency,
         'to': newCurrency,
         'amount': exchangeAmount
