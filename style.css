@@ -225,11 +225,7 @@ h1, h3 {
         top: 18px;
     }
     #js-confirmation h1 {
-        font-size: 60px;
-    }
-
-    .changing-styles {
-        color:black;
+        font-size: 100px;
     }
 
     #js-confirmation button {
