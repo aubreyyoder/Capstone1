@@ -13,6 +13,14 @@ const exchangeRateURL = 'https://www.amdoren.com/api/currency.php'
 // Get places in Google Maps
 const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
 
+// Value of oldCurrency being exchanged
+let oldCurrency = '';
+
+// Value of user amount input
+const exchangeAmount = $('#js-amount-input').val();
+
+// Value of newCurrency being converted to
+let newCurrency = '';
 
 // ----------------------------------------------------------------
 
@@ -40,9 +48,8 @@ function displayCurrencySelections() {
         <li class="currency"><button id="AUD" value="$ (AUD)">$ (AUD)</button></li>`
     );
     $('.old-currencies').removeClass('hidden');
-    var oldCurrency = '';
     $('button').on('click',function(event) {
-        var oldCurrency = this.value;
+        const oldCurrency = this.value;
         console.log(oldCurrency);
         //$('.old-currencies').addClass('hidden');
         displayInputPage(oldCurrency);
@@ -51,8 +58,6 @@ function displayCurrencySelections() {
 
 // Create function to display number input page with selected currency symbol
 function displayInputPage(oldCurrency) {
-    const exchangeAmount = $('#js-amount-input').val();
-    
     $('#input-currency-symbol').append(
         `<li id="input-symbol">${oldCurrency}</li>`
     );
@@ -78,7 +83,6 @@ function displayDesiredCurrencySelection(oldCurrency, exchangeAmount) {
     );
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
-    var newCurrency = '';
     $('button').on('click', function(event) {
         const newCurrency = this.value;
         console.log(newCurrency);
@@ -120,13 +124,13 @@ function formatQueryParams(params) {
 function getExchangeRates() {
     console.log('...Fetching exchange rates');
     const params = {
-        'api_key': accessKey,
+        'api_key': apiKey,
         'from': oldCurrency,
         'to': newCurrency,
         'amount': exchangeAmount
     }
     const queryString = formatQueryParams(params)
-    const url = searchURL + '?' + queryString;
+    const url = exchangeRateURL + '?' + queryString;
 
     console.log(url);
     fetch(url)
