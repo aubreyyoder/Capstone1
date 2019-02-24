@@ -13,14 +13,12 @@ const exchangeRateURL = 'https://www.amdoren.com/api/currency.php'
 // Get places in Google Maps
 const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
 
-// Value of oldCurrency being exchanged
+
+
 let oldCurrency = '';
-
-// Value of user amount input
-const exchangeAmount = $('#js-amount-input').val();
-
-// Value of newCurrency being converted to
 let newCurrency = '';
+let exchangeAmount='';
+
 
 // ----------------------------------------------------------------
 
@@ -49,7 +47,7 @@ function displayCurrencySelections() {
     );
     $('.old-currencies').removeClass('hidden');
     $('button').on('click',function(event) {
-        const oldCurrency = this.value;
+        const oldCurrency = $(this).val();
         console.log(oldCurrency);
         //$('.old-currencies').addClass('hidden');
         displayInputPage(oldCurrency);
@@ -58,11 +56,13 @@ function displayCurrencySelections() {
 
 // Create function to display number input page with selected currency symbol
 function displayInputPage(oldCurrency) {
+    
     $('#input-currency-symbol').append(
         `<li id="input-symbol">${oldCurrency}</li>`
     );
     $('.amount').removeClass('hidden');
-    $('#submit').on('click', event => {
+    $('#submit').on('click', function(event) {
+        let exchangeAmount = document.getElementById("user-input-amount").value;
         console.log(exchangeAmount);
         displayDesiredCurrencySelection(oldCurrency, exchangeAmount);
     })
@@ -84,7 +84,7 @@ function displayDesiredCurrencySelection(oldCurrency, exchangeAmount) {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
     $('button').on('click', function(event) {
-        const newCurrency = this.value;
+        const newCurrency = $(this).val();
         console.log(newCurrency);
         $('.new-currencies').addClass('hidden');
         displayConfirmation(oldCurrency, exchangeAmount, newCurrency);
@@ -164,7 +164,6 @@ function goToFavoritesPage() {
 // Create function for landing button to take to '#select-currency' page
 function watchForm() {
     // event handler
-    console.log();
     $('#landing-btn').on('click', event => {
         event.preventDefault;
         $('.landing').addClass('hidden');
