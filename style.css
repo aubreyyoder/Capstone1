@@ -191,12 +191,12 @@ h1, h3 {
     color: rgba(255, 255, 255, 0.856);
 }
 
-footer {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    font-size: 10px;
-    color: white;
+#add-to-favorites-btn {
+    background-color: rgb(151, 148, 148);
+}
+
+#add-to-favorites-btn:focus {
+    background-color: rgb(66, 65, 65);
 }
 
 @media only screen and (max-width: 800px) {

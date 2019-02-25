@@ -5,19 +5,16 @@ function hamburgerCross(bar) {
 
 
 // For Google Places (key = apiKey)
-const apiKey = "ceWcXsB3ARU6PnLvQ6tvgKEM3Djqrm";
+const apiKey = "5c72bc66f25b5/2279d04a235e69caf5a0500eb061e7f4";
 
 // Get the latest foreign exchange reference rates
-const exchangeRateURL = 'https://www.amdoren.com/api/currency.php'
+const exchangeRateURL = 'https://bankersalgo.com/apicalc2/'
 
 // Get places in Google Maps
 const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
 
 
 
-let oldCurrency = '';
-let newCurrency = '';
-let exchangeAmount='';
 
 
 // ----------------------------------------------------------------
@@ -36,18 +33,18 @@ function hamburgerDropDown() {
 // Create function to display select-currency page
 function displayCurrencySelections() {
     $('.old-currencies').append(
-        `<li class="currency"><button id="EUR" value="€">€ (EUR)</button></li>
-        <li class="currency"><button id="JAP" value="¥">¥ (JAP)</button></li>
-        <li class="currency"><button id="GBD" value="£">£ (GBD)</button></li>
-        <li class="currency"><button id="CAD" value="$ (CAD)">$ (CAD)</button></li>
-        <li class="currency"><button id="USD" value="$ (USD)">$ (USD)</button></li>
-        <li class="currency"><button id="NZD" value="$ (NZD)">$ (NZD)</button></li>
-        <li class="currency"><button id="MXN" value="$ (MEX)">$ (MEX)</button></li>
-        <li class="currency"><button id="AUD" value="$ (AUD)">$ (AUD)</button></li>`
+        `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
+        <li class="currency"><button id="JAP" name="¥"value="JAP">¥ (JAP)</button></li>
+        <li class="currency"><button id="GBD" name="£" value="GBD">£ (GBD)</button></li>
+        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
+        <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
+        <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
+        <li class="currency"><button id="MXN" name="$ (MEX)" value="MEX">$ (MEX)</button></li>
+        <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
     );
     $('.old-currencies').removeClass('hidden');
     $('button').on('click',function(event) {
-        const oldCurrency = $(this).val();
+        const oldCurrency = this.value;
         console.log(oldCurrency);
         //$('.old-currencies').addClass('hidden');
         displayInputPage(oldCurrency);
@@ -64,32 +61,33 @@ function displayInputPage(oldCurrency) {
     $('#submit').on('click', function(event) {
         let exchangeAmount = document.getElementById("user-input-amount").value;
         console.log(exchangeAmount);
-        displayDesiredCurrencySelection(oldCurrency, exchangeAmount);
+        displayDesiredCurrencySelection();
     })
 }
 
 // Create function to display desired currency page
-function displayDesiredCurrencySelection(oldCurrency, exchangeAmount) {
-    $('.new-currencies').removeClass('hidden');
-    $('.new-currencies').append(
-        `<li class="currency"><button id="EUR" value="€">€ (EUR)</button></li>
-        <li class="currency"><button id="JAP" value="¥">¥ (JAP)</button></li>
-        <li class="currency"><button id="GBD" value="£">£ (GBD)</button></li>
-        <li class="currency"><button id="CAD" value="$ (CAD)">$ (CAD)</button></li>
-        <li class="currency"><button id="USD" value="$ (USD)">$ (USD)</button></li>
-        <li class="currency"><button id="NZD" value="$ (NZD)">$ (NZD)</button></li>
-        <li class="currency"><button id="MXN" value="$ (MEX)">$ (MEX)</button></li>
-        <li class="currency"><button id="AUD" value="$ (AUD)">$ (AUD)</button></li>`
-    );
+function displayDesiredCurrencySelection() {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
+    $('.new-currencies').removeClass('hidden');
+    $('.new-currencies').append(
+        `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
+        <li class="currency"><button id="JAP" name="¥"value="JAP">¥ (JAP)</button></li>
+        <li class="currency"><button id="GBD" name="£" value="GBD">£ (GBD)</button></li>
+        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
+        <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
+        <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
+        <li class="currency"><button id="MXN" name="$ (MEX)" value="MEX">$ (MEX)</button></li>
+        <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
+    );
     $('button').on('click', function(event) {
-        const newCurrency = $(this).val();
+        const newCurrency = this.value;
         console.log(newCurrency);
         $('.new-currencies').addClass('hidden');
         displayConfirmation(oldCurrency, exchangeAmount, newCurrency);
     });
 }
+
 
 // Create function to show "is this correct? Page"
 function displayConfirmation(oldCurrency, exchangeAmount, newCurrency) {
@@ -106,31 +104,39 @@ function displayConfirmation(oldCurrency, exchangeAmount, newCurrency) {
     $('button').on('click', function(event) {
         if (this.value == yesButton) {
             console.log(yesButton);
-            getExchangeRates();
+            getExchangedRate(oldCurrency, exchangeAmount, newCurrency);
         } else if (this.value == noButton) {
             console.log(noButton);
             alert(`CLICK 'HOME' IN THE NAVBAR TO START OVER!!`);
         }
     })
+    $('.confirmation').addClass('hidden');
 }
 
 function formatQueryParams(params) {
     const queryItems = Object.keys(params)
-      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-    return queryItems.join('&');
+      .map(key => `${encodeURIComponent(params[key])}`)
+    return queryItems.join('/');
 }
 
 // Creates a function that fetches API info for exchange rates
-function getExchangeRates() {
+function getExchangedRate(apiKey, oldCurrency, exchangeAmount, newCurrency) {
     console.log('...Fetching exchange rates');
+    console.log(apiKey);
+    console.log(oldCurrency);
+    console.log(exchangeAmount);
+    console.log(newCurrency);
+
+    
     const params = {
-        'api_key': apiKey,
-        'from': oldCurrency,
-        'to': newCurrency,
-        'amount': exchangeAmount
+        apiKey,
+        oldCurrency,
+        newCurrency,
+        exchangeAmount
     }
+
     const queryString = formatQueryParams(params)
-    const url = exchangeRateURL + '?' + queryString;
+    const url = exchangeRateURL + queryString;
 
     console.log(url);
     fetch(url)
@@ -149,15 +155,39 @@ function getExchangeRates() {
 // Create function to display results
 function displayResults(responseJson) {
     console.log(responseJson);
+    $('#results-list').append(
+        `<li class="results-list-items">${oldCurrency} ${exchangeAmount} = 
+        ${newCurrency} ${responseJson.result}</li>`
+    );
+    $('.results').removeClass('hidden');
 }
 
 // Create Favorites button that saves to favorites page
-function saveToFavorites() {
+function addToFavorites() {
+    $('#add-to-favorites-btn').click(event => {
+        event.preventDefault();
+        console.log('add-to-favorites-btn clicked');
+    })
 
+}
+
+function findBank() {
+    $('#find-bank-btn').click(event => {
+        event.preventDefault();
+        console.log('find-bank-btn clicked');
+    })
+}
+
+function newSearch() {
+    $('#new-search-btn').click(event => {
+        event.preventDefault();
+        console.log('new-search-btn clicked');
+    })
 }
 
 // Create favorites page
 function goToFavoritesPage() {
+    $('#')
 
 }
 

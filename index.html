@@ -61,15 +61,18 @@
             <section class="results hidden">
                 <div id="results-page">
                     <div id="js-conversion-results">
-                        <ul name="results" class="results-list">
+                        <ul id="results-list" name="results">
                         </ul>
                         <p id="js-error-message" class="error"></p>
                     </div>
                     <div id="options">
+                        <p id="js-add-to-favorites" class="favorites">
+                            Plan on using this currency exchange again?<br>
+                            ADD TO FAVORITES:</p>
+                        <button id="add-to-favorites-btn">&hearts;</button>
                         <h3>FIND LOCATION</h3>
-                        <a id="bank-symbol" href=""></a>
-                        <a id="favorite-symbol" href=""></a>
-                        <a id="new-search-symbol" href=""></a> 
+                        <button id="find-bank-btn">&#127963;</button>
+                        <button id="new-search-btn">&#127760;</button> 
                     </div>
                 </div>
             </section>
@@ -86,7 +89,6 @@
                 </ul>
             </div>
         </section>
-        <footer>Powered by <a href="https://www.amdoren.com">Amdoren</a></footer>
         <script src="script.js"></script>
     </body>
 </html>
