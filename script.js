@@ -13,7 +13,9 @@ const exchangeRateURL = 'https://bankersalgo.com/apicalc2/'
 // Get places in Google Maps
 const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
 
-
+let desiredCurrency = '';
+let sourceCurrency = '';
+let exchangeAmount = '';
 
 
 
@@ -21,8 +23,25 @@ const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/outpu
 
 
 // Create function navbar buttons take to certain pages
-function navBarReroutes() {
+function navLanding() {
+    $('#nav-landing').click(event => {
+        event.preventDefault();
+        watchForm();
+    })
+}
 
+function navFavorites() {
+    $('#nav-favorites').click(event => {
+        event.preventDefault();
+        goToFavoritesPage();
+    })
+}
+
+function navLocations() {
+    $('#nav-locations').click(event => {
+        event.preventDefault();
+        goToLocationPage();
+    })
 }
 
 // Create button to drop down menu for hamburger menu
@@ -44,22 +63,24 @@ function displayCurrencySelections() {
     );
     $('.old-currencies').removeClass('hidden');
     $('button').on('click',function(event) {
-        const oldCurrency = this.value;
-        console.log(oldCurrency);
+        event.preventDefault();
+        sourceCurrency = this.value;
+        console.log(sourceCurrency);
         //$('.old-currencies').addClass('hidden');
-        displayInputPage(oldCurrency);
+        displayInputPage(sourceCurrency);
     });
 }
 
 // Create function to display number input page with selected currency symbol
-function displayInputPage(oldCurrency) {
+function displayInputPage(sourceCurrency) {
     
     $('#input-currency-symbol').append(
-        `<li id="input-symbol">${oldCurrency}</li>`
+        `<li id="input-symbol">${sourceCurrency}</li>`
     );
     $('.amount').removeClass('hidden');
     $('#submit').on('click', function(event) {
-        let exchangeAmount = document.getElementById("user-input-amount").value;
+        event.preventDefault();
+        exchangeAmount = document.getElementById("user-input-amount").value;
         console.log(exchangeAmount);
         displayDesiredCurrencySelection();
     })
@@ -81,19 +102,20 @@ function displayDesiredCurrencySelection() {
         <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
     );
     $('button').on('click', function(event) {
-        const newCurrency = this.value;
-        console.log(newCurrency);
+        event.preventDefault();
+        desiredCurrency = this.value;
+        console.log(desiredCurrency);
         $('.new-currencies').addClass('hidden');
-        displayConfirmation(oldCurrency, exchangeAmount, newCurrency);
+        displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency);
     });
 }
 
 
 // Create function to show "is this correct? Page"
-function displayConfirmation(oldCurrency, exchangeAmount, newCurrency) {
+function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
     $('.confirmation').removeClass('hidden');
     $('#confirmation-paragraph').replaceWith(
-        `<h1>${oldCurrency} ${exchangeAmount} to ${newCurrency}</h1>
+        `<h1>${sourceCurrency} ${exchangeAmount} to ${desiredCurrency}</h1>
         <button id ="js-yes-btn" value="yes">YES</button>
         <button id="js-no-btn" value="no">NO</button>`
     );
@@ -104,7 +126,7 @@ function displayConfirmation(oldCurrency, exchangeAmount, newCurrency) {
     $('button').on('click', function(event) {
         if (this.value == yesButton) {
             console.log(yesButton);
-            getExchangedRate(oldCurrency, exchangeAmount, newCurrency);
+            getExchangedRate(sourceCurrency, exchangeAmount, desiredCurrency);
         } else if (this.value == noButton) {
             console.log(noButton);
             alert(`CLICK 'HOME' IN THE NAVBAR TO START OVER!!`);
@@ -120,18 +142,18 @@ function formatQueryParams(params) {
 }
 
 // Creates a function that fetches API info for exchange rates
-function getExchangedRate(apiKey, oldCurrency, exchangeAmount, newCurrency) {
+function getExchangedRate(apiKey, sourceCurrency, exchangeAmount, desiredCurrency) {
     console.log('...Fetching exchange rates');
     console.log(apiKey);
-    console.log(oldCurrency);
+    console.log(sourceCurrency);
     console.log(exchangeAmount);
-    console.log(newCurrency);
+    console.log(desiredCurrency);
 
     
     const params = {
         apiKey,
-        oldCurrency,
-        newCurrency,
+        sourceCurrency,
+        desiredCurrency,
         exchangeAmount
     }
 
@@ -156,8 +178,8 @@ function getExchangedRate(apiKey, oldCurrency, exchangeAmount, newCurrency) {
 function displayResults(responseJson) {
     console.log(responseJson);
     $('#results-list').append(
-        `<li class="results-list-items">${oldCurrency} ${exchangeAmount} = 
-        ${newCurrency} ${responseJson.result}</li>`
+        `<li class="results-list-items">${sourceCurrency} ${exchangeAmount} = 
+        ${desiredCurrency} ${responseJson.result}</li>`
     );
     $('.results').removeClass('hidden');
 }
@@ -167,6 +189,9 @@ function addToFavorites() {
     $('#add-to-favorites-btn').click(event => {
         event.preventDefault();
         console.log('add-to-favorites-btn clicked');
+        $('#faves-list').append(
+            `<li class="fav-items">${sourceCurrency} to ${desiredCurrency}</li>`
+        )
     })
 
 }
@@ -191,6 +216,10 @@ function goToFavoritesPage() {
 
 }
 
+function goToLocationPage() {
+
+}
+
 // Create function for landing button to take to '#select-currency' page
 function watchForm() {
     // event handler
@@ -202,6 +231,11 @@ function watchForm() {
 }
 
 
+function handleFunction() {
+    watchForm();
+    navLanding();
+    navFavorites();
+    navLocations();
+}
 
-
-$(watchForm);
+$(handleFunction);
