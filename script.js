@@ -46,7 +46,16 @@ function navLocations() {
 
 // Create button to drop down menu for hamburger menu
 function hamburgerDropDown() {
-
+    $( document ).ready(function() {
+        $('.hamburger').click(event => {
+            $('.responsive-menu').addClass('expand')
+            $('.hamburger').addClass('btn-none')
+        });
+        $( '.close-btn' ).click(function(){
+            $('.responsive-menu').removeClass('expand')
+            $('.hamburger').removeClass('btn-none')
+        })
+    });
 }
 
 // Create function to display select-currency page
@@ -82,12 +91,12 @@ function displayInputPage(sourceCurrency) {
         event.preventDefault();
         exchangeAmount = document.getElementById("user-input-amount").value;
         console.log(exchangeAmount);
-        displayDesiredCurrencySelection();
+        displayDesiredCurrencySelection(sourceCurrency, exchangeAmount);
     })
 }
 
 // Create function to display desired currency page
-function displayDesiredCurrencySelection() {
+function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
     $('.new-currencies').removeClass('hidden');
@@ -110,11 +119,9 @@ function displayDesiredCurrencySelection() {
     });
 }
 
-
-// Create function to show "is this correct? Page"
 function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
-    $('.confirmation').removeClass('hidden');
-    $('#confirmation-paragraph').replaceWith(
+    $('#confirmation').removeClass('hidden');
+    $('#js-confirmation').append(
         `<h1>${sourceCurrency} ${exchangeAmount} to ${desiredCurrency}</h1>
         <button id ="js-yes-btn" value="yes">YES</button>
         <button id="js-no-btn" value="no">NO</button>`
@@ -124,15 +131,16 @@ function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
     const noButton = $('#js-no-btn').val();
     
     $('button').on('click', function(event) {
+        event.preventDefault();
         if (this.value == yesButton) {
             console.log(yesButton);
             getExchangedRate(sourceCurrency, exchangeAmount, desiredCurrency);
+            $('.confirmation').addClass('hidden');
         } else if (this.value == noButton) {
             console.log(noButton);
             alert(`CLICK 'HOME' IN THE NAVBAR TO START OVER!!`);
         }
     })
-    $('.confirmation').addClass('hidden');
 }
 
 function formatQueryParams(params) {
@@ -189,7 +197,7 @@ function addToFavorites() {
     $('#add-to-favorites-btn').click(event => {
         event.preventDefault();
         console.log('add-to-favorites-btn clicked');
-        $('#faves-list').append(
+        $('#favs-list').append(
             `<li class="fav-items">${sourceCurrency} to ${desiredCurrency}</li>`
         )
     })
@@ -212,7 +220,7 @@ function newSearch() {
 
 // Create favorites page
 function goToFavoritesPage() {
-    $('#')
+    
 
 }
 
@@ -236,6 +244,7 @@ function handleFunction() {
     navLanding();
     navFavorites();
     navLocations();
+    hamburgerDropDown();
 }
 
 $(handleFunction);

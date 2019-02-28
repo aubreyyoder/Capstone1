@@ -186,6 +186,13 @@ a:hover span:nth-child(4) {
     display: none;
 }
 
+#js-confirmation {
+    font-size: 30px;
+    position: relative;
+    text-align: center;
+    top: 18px;
+}
+
 h1, h3 {
     font-family: sans-serif;
     color: rgba(255, 255, 255, 0.856);
@@ -226,12 +233,8 @@ h1, h3 {
         color: white;
     }
 
-    #js-confirmation {
-        font-size: 30px;
-        position: relative;
-        text-align: center;
-        top: 18px;
-    }
+   
+    
     #js-confirmation h1 {
         font-size: 100px;
     }
