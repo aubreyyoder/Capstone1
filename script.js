@@ -1,12 +1,7 @@
-function hamburgerCross(bar) {
-    bar.classList.toggle("change");
-}
-
-
-
-// For Google Places (key = apiKey)
 const apiKey = "5c72bc66f25b5"
 const apiKey2 = "2279d04a235e69caf5a0500eb061e7f4";
+
+const apiKey3 = "AIzaSyAOnPrXIPeJHHzNBAZIcx7EP6A1ktWLvRg";
 
 // Get the latest foreign exchange reference rates
 const exchangeRateURL = 'https://bankersalgo.com/apicalc2/'
@@ -26,6 +21,10 @@ let exchangeAmount = '';
 
 // ----------------------------------------------------------------
 
+
+function hamburgerCross(bar) {
+    bar.classList.toggle("change");
+}
 
 // Create function navbar buttons take to certain pages
 function navLanding() {
@@ -140,17 +139,24 @@ function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
     })
 }
 
-function formatQueryParams(params) {
-    const queryItems = Object.keys(params)
-      .map(key => `${encodeURIComponent(params[key])}`)
-    return queryItems.join('/');
+function formatExchangeQueryParams(exchangeParams) {
+    const queryItems1 = Object.keys(exchangeParams)
+        .map(key => `${encodeURIComponent(exchangeParams[key])}`)
+    return queryItems1.join('/');
+}
+
+function formatLocationsQueryParams(locationParams) {
+    const queryItems2 = Object.keys(locationParams)
+        .map(key => `${encodeURIComponent(key)}=
+        ${encodeURIComponent(locationParams[key])}`)
+    return queryItems2.join('/');
 }
 
 // Creates a function that fetches API info for exchange rates
 function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency) {
     console.log('...Fetching exchange rates');
     
-    const params = {
+    const exchangeParams = {
         apiKey,
         apiKey2,
         sourceCurrency,
@@ -158,10 +164,10 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
         exchangeAmount
     }
 
-    const queryString = formatQueryParams(params)
-    const url = updatedURL + queryString;
+    const queryString1 = formatExchangeQueryParams(exchangeParams)
+    const currencyConversionURL = updatedURL + queryString1;
 
-    fetch(url)
+    fetch(currencyConversionURL)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -174,6 +180,31 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
         });
 }
 
+function getGooglePlaces(apiKey3) {
+    console.log('...fetching Google Places API');
+
+    const locationParams = {
+        key : apiKey3,
+        input : "bank",
+        inputtype : 'textquery"'
+    }
+
+    const queryString2 = formatLocationQueryParams(locationParams)
+    const locationURL = placesURL + queryString2;
+
+    fetch(locationURL)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(responseJson => displayLocationResults(responseJson))
+        .catch(err => {
+            $('#js-error-message').text(`Something went wrong: ${err.message}`);
+        })
+}
+
 // Create function to display results
 function displayResults(responseJson) {
     console.log(responseJson);
@@ -183,6 +214,11 @@ function displayResults(responseJson) {
     $('.results').removeClass('hidden');
     newSearch();
     findBank();
+}
+
+function displayLocationResults() {
+    $('.locations').removeClass('hidden');
+
 }
 
 function findBank() {
@@ -205,7 +241,11 @@ function goToLandingPage() {
 }
 
 function goToLocationPage() {
-    $('.locations').removeClass('hidden');
+    $('.select-currency').addClass('hidden');
+    $('.results').addClass('hidden');
+    $('.amount').addClass('hidden');
+    $('.confirmation').addClass('hidden');
+    displayLocationResults();
 }
 
 function watchForm() {
