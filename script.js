@@ -31,14 +31,7 @@ let exchangeAmount = '';
 function navLanding() {
     $('#nav-landing').click(event => {
         event.preventDefault();
-        watchForm();
-    })
-}
-
-function navFavorites() {
-    $('#nav-favorites').click(event => {
-        event.preventDefault();
-        goToFavoritesPage();
+        goToLandingPage();
     })
 }
 
@@ -67,12 +60,12 @@ function hamburgerDropDown() {
 function displayCurrencySelections() {
     $('.old-currencies').append(
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
-        <li class="currency"><button id="JAP" name="¥"value="JAP">¥ (JAP)</button></li>
+        <li class="currency"><button id="JPY" name="¥"value="JPY">¥ (JPY)</button></li>
         <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
         <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
         <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
-        <li class="currency"><button id="MXN" name="$ (MEX)" value="MEX">$ (MEX)</button></li>
+        <li class="currency"><button id="MXN" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
         <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
     );
     $('.old-currencies').removeClass('hidden');
@@ -107,12 +100,12 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
     $('.new-currencies').removeClass('hidden');
     $('.new-currencies').append(
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
-        <li class="currency"><button id="JAP" name="¥"value="JAP">¥ (JAP)</button></li>
+        <li class="currency"><button id="JPY" name="¥"value="JPY">¥ (JPY)</button></li>
         <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
         <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
         <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
-        <li class="currency"><button id="MXN" name="$ (MEX)" value="MEX">$ (MEX)</button></li>
+        <li class="currency"><button id="MXN" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
         <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
     );
     $('button').on('click', function(event) {
@@ -189,17 +182,8 @@ function displayResults(responseJson) {
         `<li class="results-list-items">${desiredCurrency} ${responseJson.result}</li>`
     );
     $('.results').removeClass('hidden');
-}
-
-// Create Favorites button that saves to favorites page
-function addToFavorites() {
-    $('#add-to-favorites-btn').click(event => {
-        event.preventDefault();
-        console.log('add-to-favorites-btn clicked');
-        $('#favs-list').append(
-            `<li class="fav-items">${sourceCurrency} to ${desiredCurrency}</li>`
-        )
-    })
+    newSearch();
+    findBank();
 }
 
 function findBank() {
@@ -211,24 +195,20 @@ function findBank() {
 
 function newSearch() {
     $('#new-search-btn').click(event => {
-        event.preventDefault();
-        console.log('new-search-btn clicked');
+        $('.results').addClass('hidden');
+        goToLandingPage();
     })
 }
 
-// Create favorites page
-function goToFavoritesPage() {
-    
-
+function goToLandingPage() {
+    document.location.reload();
 }
 
 function goToLocationPage() {
-
+    $('.locations').removeClass('hidden');
 }
 
-// Create function for landing button to take to '#select-currency' page
 function watchForm() {
-    // event handler
     $('#landing-btn').on('click', event => {
         event.preventDefault;
         $('.landing').addClass('hidden');
@@ -236,11 +216,9 @@ function watchForm() {
     });
 }
 
-
 function handleFunction() {
     watchForm();
     navLanding();
-    navFavorites();
     navLocations();
     hamburgerDropDown();
 }
