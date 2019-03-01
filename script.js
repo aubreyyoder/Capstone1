@@ -11,6 +11,10 @@ const apiKey2 = "2279d04a235e69caf5a0500eb061e7f4";
 // Get the latest foreign exchange reference rates
 const exchangeRateURL = 'https://bankersalgo.com/apicalc2/'
 
+const bypassCorsURL = ' https://cors-anywhere.herokuapp.com/';
+
+const updatedURL = bypassCorsURL + exchangeRateURL;
+
 // Get places in Google Maps
 const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
 
@@ -64,7 +68,7 @@ function displayCurrencySelections() {
     $('.old-currencies').append(
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
         <li class="currency"><button id="JAP" name="¥"value="JAP">¥ (JAP)</button></li>
-        <li class="currency"><button id="GBD" name="£" value="GBD">£ (GBD)</button></li>
+        <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
         <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
         <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
@@ -104,7 +108,7 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
     $('.new-currencies').append(
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
         <li class="currency"><button id="JAP" name="¥"value="JAP">¥ (JAP)</button></li>
-        <li class="currency"><button id="GBD" name="£" value="GBD">£ (GBD)</button></li>
+        <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
         <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
         <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
@@ -162,18 +166,10 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
         exchangeAmount
     }
 
-    const options = {
-        headers: new Headers({
-            "Access-Control-Allow-Origin" : "*",
-            "Content-type" : "application/json"
-        })
-    }
-
-    
     const queryString = formatQueryParams(params)
-    const url = exchangeRateURL + queryString;
+    const url = updatedURL + queryString;
 
-    fetch(url, options)
+    fetch(url)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -190,8 +186,7 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
 function displayResults(responseJson) {
     console.log(responseJson);
     $('#results-list').append(
-        `<li class="results-list-items">${sourceCurrency} ${exchangeAmount} = 
-        ${desiredCurrency} ${responseJson.result}</li>`
+        `<li class="results-list-items">${desiredCurrency} ${responseJson.result}</li>`
     );
     $('.results').removeClass('hidden');
 }
@@ -205,7 +200,6 @@ function addToFavorites() {
             `<li class="fav-items">${sourceCurrency} to ${desiredCurrency}</li>`
         )
     })
-
 }
 
 function findBank() {
