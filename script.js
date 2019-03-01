@@ -5,7 +5,8 @@ function hamburgerCross(bar) {
 
 
 // For Google Places (key = apiKey)
-const apiKey = "5c72bc66f25b5/2279d04a235e69caf5a0500eb061e7f4";
+const apiKey = "5c72bc66f25b5"
+const apiKey2 = "2279d04a235e69caf5a0500eb061e7f4";
 
 // Get the latest foreign exchange reference rates
 const exchangeRateURL = 'https://bankersalgo.com/apicalc2/'
@@ -134,7 +135,7 @@ function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
         event.preventDefault();
         if (this.value == yesButton) {
             console.log(yesButton);
-            getExchangedRate(sourceCurrency, exchangeAmount, desiredCurrency);
+            getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency);
             $('.confirmation').addClass('hidden');
         } else if (this.value == noButton) {
             console.log(noButton);
@@ -150,26 +151,29 @@ function formatQueryParams(params) {
 }
 
 // Creates a function that fetches API info for exchange rates
-function getExchangedRate(apiKey, sourceCurrency, exchangeAmount, desiredCurrency) {
+function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency) {
     console.log('...Fetching exchange rates');
-    console.log(apiKey);
-    console.log(sourceCurrency);
-    console.log(exchangeAmount);
-    console.log(desiredCurrency);
-
     
     const params = {
         apiKey,
+        apiKey2,
         sourceCurrency,
         desiredCurrency,
         exchangeAmount
     }
 
+    const options = {
+        headers: new Headers({
+            "Access-Control-Allow-Origin" : "*",
+            "Content-type" : "application/json"
+        })
+    }
+
+    
     const queryString = formatQueryParams(params)
     const url = exchangeRateURL + queryString;
 
-    console.log(url);
-    fetch(url)
+    fetch(url, options)
         .then(response => {
             if (response.ok) {
                 return response.json();
