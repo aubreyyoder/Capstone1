@@ -30,7 +30,6 @@ let exchangeAmount = '';
 // Create function navbar buttons take to certain pages
 function navLanding() {
     $('#nav-landing').click(event => {
-        event.preventDefault();
         goToLandingPage();
     })
 }
@@ -190,6 +189,7 @@ function findBank() {
     $('#find-bank-btn').click(event => {
         event.preventDefault();
         console.log('find-bank-btn clicked');
+        goToLocationPage();
     })
 }
 
