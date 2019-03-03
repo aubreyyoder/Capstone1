@@ -170,6 +170,10 @@ a:hover span:nth-child(4) {
     top: 200px;
 }
 
+.instructional-item {
+    padding: 100px;
+}
+
 .currency button {
     background-color: antiquewhite;
     border: 2px solid white;

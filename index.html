@@ -38,16 +38,19 @@
             <section class="select-currency">
                 <div id="js-currency-exchange">
                     <ul class="old-currencies hidden">
+                        <li class="instructional-item"><h1>Which currency are you converting from?</h1></li>
                     </ul>
                     <ul class="new-currencies hidden">
+                        <li class="instructional-item"><h1>Which currency are you converting to?</h1></li>
                     </ul>
                 </div>
             </section>
             <section class="amount hidden">
                 <div id="js-amount-input">
+                    <h1>How much are you converting?</h1>
                     <ul id="input-currency-symbol">
                     </ul>
-                    <input id="user-input-amount" type="number" placeholder="HOW MUCH?"></input>
+                    <input id="user-input-amount" type="number" placeholder="HOW MUCH?" required></input>
                     <button id="submit" class="submit">CONVERT</button>
                 </div>
             </section>
