@@ -3,7 +3,7 @@ const apiKey2 = "2279d04a235e69caf5a0500eb061e7f4";
 const apiKey3 = 'AIzaSyAOnPrXIPeJHHzNBAZIcx7EP6A1ktWLvRg';
 const exchangeRateURL = 'https://bankersalgo.com/apicalc2/';
 const bypassCorsURL = 'https://cors-anywhere.herokuapp.com/';
-const placesURL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json';
+const placesURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 const updatedURL = bypassCorsURL + exchangeRateURL;
 const updatedLocationURL = bypassCorsURL + placesURL;
 
@@ -178,9 +178,8 @@ function getGooglePlaces(apiKey3, bankInput) {
     console.log('...fetching Google Places API');
 
     const locationParams = {
-        key : apiKey3,
-        input : bankInput,
-        inputtype : 'textquery'
+        query : bankInput,
+        key : apiKey3
     }
 
     const queryString2 = formatLocationQueryParams(locationParams)
@@ -212,9 +211,15 @@ function displayCurrencyResults(responseJson) {
 
 function displayLocationResults(responseJson) {
     console.log(responseJson);
-    $('#locations-list').append(
-        `<li class="location-list-items">`
-    );
+    for (let i = 0; i <= responseJson.results.length; i++) {
+        console.log(`${responseJson.results[i].name}`)
+        $('#locations-list').append(
+            `<li class="location-list-items"><h3>${responseJson.results[i].name}</h3>
+            <p><a id="bank-address" href="https://www.google.com/maps/search/${responseJson.results[i].formatted_address}">${responseJson.results[i].formatted_address}</a></p>
+            </li>`
+        );
+    }
+
     $('.locations').removeClass('hidden');
 
 }
