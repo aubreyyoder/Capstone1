@@ -20,7 +20,7 @@
             <div class="responsive-menu fixed">
                 <ul id="nav-menu">
                     <li><a id="nav-landing" href="#">HOME</a></li>
-                    <li><a id="nav-locations" href="#">FIND A LOCATION</a></li>
+                    <li><a id="nav-locations" href="#">FIND A BANK</a></li>
                 </ul>
             </div>
         </header>
@@ -48,7 +48,7 @@
                     <ul id="input-currency-symbol">
                     </ul>
                     <input id="user-input-amount" type="number" placeholder="HOW MUCH ARE YOU CONVERTING?"></input>
-                    <button id="submit">CONVERT</button>
+                    <button id="submit" class="submit">CONVERT</button>
                 </div>
             </section>
             <section id="confirmation" class="confirmation hidden">
@@ -65,9 +65,10 @@
                         <p id="js-error-message" class="error"></p>
                     </div>
                     <div id="options">
-                        <h3>FIND LOCATION<br>TO CONVERT YOUR MONEY:</h3>
+                        <h3>FIND A BANK<br>TO CONVERT YOUR MONEY:</h3>
+                        <input id="zip-code-search" type="number" placeholder="Search zip code here"></input><br>
                         <button id="find-bank-btn">&#127963;</button>
-                        <h3>START NEW SEARCH:</h3>
+                        <h3>START NEW CURRENCY EXCHANGE SEARCH:</h3>
                         <button id="new-search-btn">&#127760;</button> 
                     </div>
                 </div>

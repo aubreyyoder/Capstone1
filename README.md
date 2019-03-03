@@ -2,21 +2,6 @@ This app was developed to allow the user to view foreign exchange rates in multi
 
 After each conversion, the user may search for nearby locations that have the ability to process the conversions they desire.
 
-
-
-
-
-
-
-
-// Rates are quoted against the Euro by default. Quote against a different currency by setting the base parameter in your request.
-// change base parameter: https://api.exchangeratesapi.io/latest?base=USD
-
-// Request specific exchange rates by setting the symbols parameter.
-// change symbols parameter: https://api.exchangeratesapi.io/latest?symbols=USD,GBP
-
-
-
 //Google API:
 //Required parameters
 

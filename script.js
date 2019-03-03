@@ -1,17 +1,11 @@
 const apiKey = "5c72bc66f25b5"
 const apiKey2 = "2279d04a235e69caf5a0500eb061e7f4";
-
-const apiKey3 = "AIzaSyAOnPrXIPeJHHzNBAZIcx7EP6A1ktWLvRg";
-
-// Get the latest foreign exchange reference rates
-const exchangeRateURL = 'https://bankersalgo.com/apicalc2/'
-
-const bypassCorsURL = ' https://cors-anywhere.herokuapp.com/';
-
+const apiKey3 = 'AIzaSyAOnPrXIPeJHHzNBAZIcx7EP6A1ktWLvRg';
+const exchangeRateURL = 'https://bankersalgo.com/apicalc2/';
+const bypassCorsURL = 'https://cors-anywhere.herokuapp.com/';
+const placesURL = 'https://maps.googleapis.com/maps/api/place/findplacefromtext/json';
 const updatedURL = bypassCorsURL + exchangeRateURL;
-
-// Get places in Google Maps
-const placesURL = 'https://maps.googleapis.com/maps/api/place/nearbysearch/output'
+const updatedLocationURL = bypassCorsURL + placesURL;
 
 let desiredCurrency = '';
 let sourceCurrency = '';
@@ -145,11 +139,11 @@ function formatExchangeQueryParams(exchangeParams) {
     return queryItems1.join('/');
 }
 
-function formatLocationsQueryParams(locationParams) {
+function formatLocationQueryParams(locationParams) {
     const queryItems2 = Object.keys(locationParams)
         .map(key => `${encodeURIComponent(key)}=
         ${encodeURIComponent(locationParams[key])}`)
-    return queryItems2.join('/');
+    return queryItems2.join('&');
 }
 
 // Creates a function that fetches API info for exchange rates
@@ -165,7 +159,7 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
     }
 
     const queryString1 = formatExchangeQueryParams(exchangeParams)
-    const currencyConversionURL = updatedURL + queryString1;
+    const currencyConversionURL = updatedURL +  queryString1;
 
     fetch(currencyConversionURL)
         .then(response => {
@@ -174,23 +168,23 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
             }
             throw new Error(response.statusText);
         })
-        .then(responseJson => displayResults(responseJson))
+        .then(responseJson => displayCurrencyResults(responseJson))
         .catch(err => {
             $('#js-error-message').text(`Something went wrong: ${err.message}`);
         });
 }
 
-function getGooglePlaces(apiKey3) {
+function getGooglePlaces(apiKey3, bankInput) {
     console.log('...fetching Google Places API');
 
     const locationParams = {
         key : apiKey3,
-        input : "bank",
-        inputtype : 'textquery"'
+        input : bankInput,
+        inputtype : 'textquery'
     }
 
     const queryString2 = formatLocationQueryParams(locationParams)
-    const locationURL = placesURL + queryString2;
+    const locationURL = updatedLocationURL + '?' + queryString2;
 
     fetch(locationURL)
         .then(response => {
@@ -206,7 +200,7 @@ function getGooglePlaces(apiKey3) {
 }
 
 // Create function to display results
-function displayResults(responseJson) {
+function displayCurrencyResults(responseJson) {
     console.log(responseJson);
     $('#results-list').append(
         `<li class="results-list-items">${desiredCurrency} ${responseJson.result}</li>`
@@ -216,7 +210,11 @@ function displayResults(responseJson) {
     findBank();
 }
 
-function displayLocationResults() {
+function displayLocationResults(responseJson) {
+    console.log(responseJson);
+    $('#locations-list').append(
+        `<li class="location-list-items">`
+    );
     $('.locations').removeClass('hidden');
 
 }
@@ -231,7 +229,6 @@ function findBank() {
 
 function newSearch() {
     $('#new-search-btn').click(event => {
-        $('.results').addClass('hidden');
         goToLandingPage();
     })
 }
@@ -241,11 +238,12 @@ function goToLandingPage() {
 }
 
 function goToLocationPage() {
+    const bankInput = 'bank ' + $('#zip-code-search').val();
     $('.select-currency').addClass('hidden');
     $('.results').addClass('hidden');
     $('.amount').addClass('hidden');
     $('.confirmation').addClass('hidden');
-    displayLocationResults();
+    getGooglePlaces(apiKey3, bankInput);
 }
 
 function watchForm() {
