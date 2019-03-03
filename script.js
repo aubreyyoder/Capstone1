@@ -30,7 +30,9 @@ function navLanding() {
 function navLocations() {
     $('#nav-locations').click(event => {
         event.preventDefault();
-        goToLocationPage();
+        console.log('location nav button clicked');
+        $('.find-bank').removeClass('hidden');
+        goToFindBankPage();
     })
 }
 
@@ -146,6 +148,13 @@ function formatLocationQueryParams(locationParams) {
     return queryItems2.join('&');
 }
 
+function formatLocationQueryParams(locationParams2) {
+    const queryItems3 = Object.keys(locationParams2)
+        .map(key => `${encodeURIComponent(key)}=
+        ${encodeURIComponent(locationParams2[key])}`)
+    return queryItems3.join('&');
+}
+
 // Creates a function that fetches API info for exchange rates
 function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency) {
     console.log('...Fetching exchange rates');
@@ -198,6 +207,30 @@ function getGooglePlaces(apiKey3, bankInput) {
         })
 }
 
+function getBankInfo(apiKey3, findBankInput) {
+    console.log('...fetching Google Places API');
+
+    const locationParams2 = {
+        query : findBankInput,
+        key : apiKey3
+    }
+
+    const queryString3 = formatLocationQueryParams(locationParams2)
+    const locationURL = updatedLocationURL + '?' + queryString3;
+
+    fetch(locationURL)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error(response.statusText);
+        })
+        .then(responseJson => displayLocationResults(responseJson))
+        .catch(err => {
+            $('#js-error-message').text(`Something went wrong: ${err.message}`);
+        })
+}
+
 // Create function to display results
 function displayCurrencyResults(responseJson) {
     console.log(responseJson);
@@ -206,11 +239,12 @@ function displayCurrencyResults(responseJson) {
     );
     $('.results').removeClass('hidden');
     newSearch();
-    findBank();
+    findBankEventListener();
 }
 
 function displayLocationResults(responseJson) {
     console.log(responseJson);
+    $('.locations').removeClass('hidden');
     for (let i = 0; i <= responseJson.results.length; i++) {
         console.log(`${responseJson.results[i].name}`)
         $('#locations-list').append(
@@ -220,15 +254,26 @@ function displayLocationResults(responseJson) {
         );
     }
 
-    $('.locations').removeClass('hidden');
+    
 
 }
 
-function findBank() {
+function findBankEventListener() {
     $('#find-bank-btn').click(event => {
         event.preventDefault();
         console.log('find-bank-btn clicked');
         goToLocationPage();
+    })
+}
+
+function findBank() {
+    console.log('made it this far');
+    $('#js-find-bank-btn').click(event => {
+        event.preventDefault();
+        console.log('find-bank-btn clicked');
+        const findBankInput = 'bank ' + $('#js-zip-code-search').val();
+        getBankInfo(apiKey3, findBankInput);
+        $('.find-bank').addClass('hidden');
     })
 }
 
@@ -249,6 +294,16 @@ function goToLocationPage() {
     $('.amount').addClass('hidden');
     $('.confirmation').addClass('hidden');
     getGooglePlaces(apiKey3, bankInput);
+}
+
+function goToFindBankPage() {
+    $('.select-currency').addClass('hidden');
+    $('.results').addClass('hidden');
+    $('.amount').addClass('hidden');
+    $('.confirmation').addClass('hidden');
+    $('.landing').addClass('hidden');
+    $('.locations').addClass('hidden');
+    findBank();
 }
 
 function watchForm() {

@@ -214,14 +214,23 @@ h1, h3 {
     font-size: 52px;
 }
 
-#options button {
+#options button,
+#find-bank-page button {
     font-size: 30px;
     height: 50px;
     width: 65px;
 }
 
-#options button:hover {
+#options button:hover,
+#find-bank-page button:hover {
     border: 2px dotted;
+}
+
+#find-bank-page {
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    width: 200px;
 }
 
 @media only screen and (max-width: 800px) {
