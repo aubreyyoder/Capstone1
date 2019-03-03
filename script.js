@@ -274,6 +274,7 @@ function findBank() {
         const findBankInput = 'bank ' + $('#js-zip-code-search').val();
         getBankInfo(apiKey3, findBankInput);
         $('.find-bank').addClass('hidden');
+        $('.amount').addClass('hidden');
     })
 }
 
