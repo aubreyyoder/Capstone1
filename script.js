@@ -20,7 +20,6 @@ function hamburgerCross(bar) {
     bar.classList.toggle("change");
 }
 
-// Create function navbar buttons take to certain pages
 function navLanding() {
     $('#nav-landing').click(event => {
         goToLandingPage();
@@ -30,13 +29,11 @@ function navLanding() {
 function navLocations() {
     $('#nav-locations').click(event => {
         event.preventDefault();
-        console.log('location nav button clicked');
         $('.find-bank').removeClass('hidden');
         goToFindBankPage();
     })
 }
 
-// Create button to drop down menu for hamburger menu
 function hamburgerDropDown() {
     $( document ).ready(function() {
         $('.hamburger').click(event => {
@@ -50,7 +47,6 @@ function hamburgerDropDown() {
     });
 }
 
-// Create function to display select-currency page
 function displayCurrencySelections() {
     $('.old-currencies').append(
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
@@ -66,13 +62,11 @@ function displayCurrencySelections() {
     $('button').on('click',function(event) {
         event.preventDefault();
         sourceCurrency = this.value;
-        console.log(sourceCurrency);
         $('.old-currencies').addClass('hidden');
         displayInputPage(sourceCurrency);
     });
 }
 
-// Create function to display number input page with selected currency symbol
 function displayInputPage(sourceCurrency) {
     
     $('#input-currency-symbol').append(
@@ -82,12 +76,10 @@ function displayInputPage(sourceCurrency) {
     $('#submit').on('click', function(event) {
         event.preventDefault();
         exchangeAmount = document.getElementById("user-input-amount").value;
-        console.log(exchangeAmount);
         displayDesiredCurrencySelection(sourceCurrency, exchangeAmount);
     })
 }
 
-// Create function to display desired currency page
 function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
@@ -105,7 +97,6 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
     $('button').on('click', function(event) {
         event.preventDefault();
         desiredCurrency = this.value;
-        console.log(desiredCurrency);
         $('.new-currencies').addClass('hidden');
         displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency);
     });
@@ -118,18 +109,15 @@ function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
         <button id ="js-yes-btn" value="yes">YES</button>
         <button id="js-no-btn" value="no">NO</button>`
     );
-    console.log('paragraph replaced');
     const yesButton = $('#js-yes-btn').val();
     const noButton = $('#js-no-btn').val();
     
     $('button').on('click', function(event) {
         event.preventDefault();
         if (this.value == yesButton) {
-            console.log(yesButton);
             getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency);
             $('.confirmation').addClass('hidden');
         } else if (this.value == noButton) {
-            console.log(noButton);
             alert(`CLICK 'HOME' IN THE NAVBAR TO START OVER!!`);
         }
     })
@@ -157,7 +145,6 @@ function formatLocationQueryParams(locationParams2) {
 
 // Creates a function that fetches API info for exchange rates
 function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency) {
-    console.log('...Fetching exchange rates');
     
     const exchangeParams = {
         apiKey,
@@ -184,7 +171,6 @@ function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desir
 }
 
 function getGooglePlaces(apiKey3, bankInput) {
-    console.log('...fetching Google Places API');
 
     const locationParams = {
         query : bankInput,
@@ -208,7 +194,6 @@ function getGooglePlaces(apiKey3, bankInput) {
 }
 
 function getBankInfo(apiKey3, findBankInput) {
-    console.log('...fetching Google Places API');
 
     const locationParams2 = {
         query : findBankInput,
@@ -246,31 +231,24 @@ function displayLocationResults(responseJson) {
     console.log(responseJson);
     $('.locations').removeClass('hidden');
     for (let i = 0; i <= responseJson.results.length; i++) {
-        console.log(`${responseJson.results[i].name}`)
         $('#locations-list').append(
             `<li class="location-list-items"><h3>${responseJson.results[i].name}</h3>
             <p><a id="bank-address" href="https://www.google.com/maps/search/${responseJson.results[i].formatted_address}">${responseJson.results[i].formatted_address}</a></p>
             </li>`
         );
     }
-
-    
-
 }
 
 function findBankEventListener() {
     $('#find-bank-btn').click(event => {
         event.preventDefault();
-        console.log('find-bank-btn clicked');
         goToLocationPage();
     })
 }
 
 function findBank() {
-    console.log('made it this far');
     $('#js-find-bank-btn').click(event => {
         event.preventDefault();
-        console.log('find-bank-btn clicked');
         const findBankInput = 'bank ' + $('#js-zip-code-search').val();
         getBankInfo(apiKey3, findBankInput);
         $('.find-bank').addClass('hidden');
