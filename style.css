@@ -156,22 +156,26 @@ a:hover span:nth-child(4) {
     left: 0;
 }
 
+.instructional-item {
+    font-size: 24px;
+    padding: 100px;
+    text-align: center;
+}
+
 .old-currencies,
 .new-currencies{
+    padding-top: 100px;
     width: 100%;
 }
 
 .old-currencies li, .new-currencies li {
     display: inline-block;
+    padding: 0;
 }
 
 .amount {
     position: relative;
     top: 200px;
-}
-
-.instructional-item {
-    padding: 100px;
 }
 
 .currency button {
@@ -187,7 +191,7 @@ a:hover span:nth-child(4) {
     padding: 8%;
     position: relative;
     text-decoration: none;
-    top: 150px;
+    top: 10px;
     width: 80px;
 }
 

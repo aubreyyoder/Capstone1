@@ -67,7 +67,7 @@ function displayCurrencySelections() {
         event.preventDefault();
         sourceCurrency = this.value;
         console.log(sourceCurrency);
-        //$('.old-currencies').addClass('hidden');
+        $('.old-currencies').addClass('hidden');
         displayInputPage(sourceCurrency);
     });
 }
