@@ -12,10 +12,16 @@
         <header>
             <div class="mobile-nav fixed">
                 <div class="hamburger" onclick="hamburgerCross(this)">
-                    <div class="bar1"></div>
-                    <div class="bar2"></div>
-                    <div class="bar3"></div>
+                    <div class="bar1"><span></span></div>
+                    <div class="bar2"><span></span></div>
+                    <div class="bar3"><span></span></div>
                 </div>
+            </div>
+            <div id="drop-menu">
+                <ul id="drop-nav-menu">
+                    <li><a id="nav-landing" href="#">HOME</a></li>
+                    <li><a id="nav-locations" href="#">FIND A BANK</a></li>
+                </ul>
             </div>
             <div class="responsive-menu fixed">
                 <ul id="nav-menu">
@@ -38,18 +44,16 @@
             <section class="select-currency">
                 <div id="js-currency-exchange">
                     <ul class="old-currencies hidden">
-                        <li class="instructional-item"><h1>Which currency are you converting from?</h1></li>
+                        <li class="instructional-item"><h1>WHICH CURRENCY ARE YOU CONVERTING FROM?</h1></li><br>
                     </ul>
                     <ul class="new-currencies hidden">
-                        <li class="instructional-item"><h1>Which currency are you converting to?</h1></li>
+                        <li class="instructional-item"><h1>WHICH CURRENCY ARE YOU CONVERTING TO?</h1></li><br>
                     </ul>
                 </div>
             </section>
             <section class="amount hidden">
                 <div id="js-amount-input">
-                    <h1>How much are you converting?</h1>
-                    <ul id="input-currency-symbol">
-                    </ul>
+                    <h1>HOW MUCH ARE YOU CONVERTING?</h1>
                     <input id="user-input-amount" type="number" placeholder="HOW MUCH?" required></input>
                     <button id="submit" class="submit">CONVERT</button>
                 </div>

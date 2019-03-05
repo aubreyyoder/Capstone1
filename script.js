@@ -35,15 +35,21 @@ function navLocations() {
 }
 
 function hamburgerDropDown() {
-    $( document ).ready(function() {
+    $(document).ready(function() {
         $('.hamburger').click(event => {
-            $('.responsive-menu').addClass('expand')
+            event.preventDefault();
+            $('#drop-menu').addClass('expand')
             $('.hamburger').addClass('btn-none')
         });
-        $( '.close-btn' ).click(function(){
-            $('.responsive-menu').removeClass('expand')
+        $('.close-btn').click(event => {
+            event.preventDefault();
+            $('#drop-menu').removeClass('expand')
             $('.hamburger').removeClass('btn-none')
         })
+        $( '.menu-btn' ).click(event => {
+            event.preventDefault();
+            $('#drop-menu').toggleClass('expand')
+            })
     });
 }
 
@@ -52,7 +58,7 @@ function displayCurrencySelections() {
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
         <li class="currency"><button id="JPY" name="¥"value="JPY">¥ (JPY)</button></li>
         <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
-        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
+        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li><br>
         <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
         <li class="currency"><button id="MXN" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
@@ -68,10 +74,6 @@ function displayCurrencySelections() {
 }
 
 function displayInputPage(sourceCurrency) {
-    
-    $('#input-currency-symbol').append(
-        `<li id="input-symbol">${sourceCurrency}</li>`
-    );
     $('.amount').removeClass('hidden');
     $('#submit').on('click', function(event) {
         event.preventDefault();
@@ -88,7 +90,7 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
         `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
         <li class="currency"><button id="JPY" name="¥"value="JPY">¥ (JPY)</button></li>
         <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
-        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li>
+        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li><br>
         <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
         <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
         <li class="currency"><button id="MXN" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
