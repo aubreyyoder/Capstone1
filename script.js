@@ -38,18 +38,8 @@ function hamburgerDropDown() {
     $(document).ready(function() {
         $('.hamburger').click(event => {
             event.preventDefault();
-            $('#drop-menu').addClass('expand')
-            $('.hamburger').addClass('btn-none')
+            $('.responsive-menu').toggle();
         });
-        $('.close-btn').click(event => {
-            event.preventDefault();
-            $('#drop-menu').removeClass('expand')
-            $('.hamburger').removeClass('btn-none')
-        })
-        $( '.menu-btn' ).click(event => {
-            event.preventDefault();
-            $('#drop-menu').toggleClass('expand')
-            })
     });
 }
 
