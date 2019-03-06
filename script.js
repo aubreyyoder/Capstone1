@@ -7,14 +7,6 @@ const placesURL = 'https://maps.googleapis.com/maps/api/place/textsearch/json';
 const updatedURL = bypassCorsURL + exchangeRateURL;
 const updatedLocationURL = bypassCorsURL + placesURL;
 
-let desiredCurrency = '';
-let sourceCurrency = '';
-let exchangeAmount = '';
-
-
-
-// ----------------------------------------------------------------
-
 
 function hamburgerCross(bar) {
     bar.classList.toggle("change");
@@ -135,7 +127,6 @@ function formatLocationQueryParams(locationParams2) {
     return queryItems3.join('&');
 }
 
-// Creates a function that fetches API info for exchange rates
 function getExchangedRate(apiKey, apiKey2, sourceCurrency, exchangeAmount, desiredCurrency) {
     
     const exchangeParams = {
@@ -208,7 +199,6 @@ function getBankInfo(apiKey3, findBankInput) {
         })
 }
 
-// Create function to display results
 function displayCurrencyResults(responseJson) {
     console.log(responseJson);
     $('#results-list').append(
