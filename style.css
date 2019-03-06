@@ -180,9 +180,33 @@ a:hover span:nth-child(4) {
 
 .instructional-item,
 #js-amount-input h1 {
-    font-size: 24px;
-    padding: 100px;
+    padding: 80px;
     text-align: center;
+}
+
+.instructional-item {
+    font-size: 20px;
+}
+
+#user-input-amount {
+    font-size: 18px;
+    height: 30px;
+    text-align: center;
+    width: 200px;
+}
+
+#js-amount-input h1 {
+    font-size: 30px;
+}
+
+#submit {
+    height: 38px;
+    width: 100px;
+}
+
+#submit:hover {
+    background-color: black;
+    color: white;
 }
 
 .old-currencies,
@@ -208,7 +232,7 @@ a:hover span:nth-child(4) {
     font-size: 30px;
     position: relative;
     text-align: center;
-    top: 18px;
+    top: 250px;
 }
 
 h1, h3, #results-list {
@@ -220,18 +244,19 @@ h1, h3, #results-list {
     padding: 50px;
     position: relative;
     text-align: center;
-    top: 200px;
+    top: 80px;
 }
 
 #results-list {
-    font-size: 80px;
+    font-size: 60px;
+    text-shadow: #FC0 1px 0 10px;
 }
 
 #options button,
 #find-bank-page button {
     font-size: 30px;
-    height: 50px;
-    width: 65px;
+    height: 70px;
+    width: 95px;
 }
 
 #options button:hover,
@@ -239,11 +264,49 @@ h1, h3, #results-list {
     border: 2px dotted;
 }
 
+#options h3 {
+    color: black;
+    font-family: 'Yanone Kaffeesatz', sans-serif;
+    font-size: 32px;
+}
+
 #find-bank-page {
     position: absolute;
     text-align: center;
     top: 40%;
+    width: 100%;
+}
+
+#zip-code-search,
+#js-zip-code-search {
+    font-size: 20px;
+    height: 30px;
+    margin-bottom: 50px;
     width: 200px;
+}
+
+#locations-list {
+    position: relative;
+    top: 50px;
+}
+
+.location-list-items {
+    padding-bottom: 20px;
+    text-align: center;
+}
+
+.location-list-items h3 {
+    font-size: 24px;
+}
+
+.location-list-items a {
+    color: black;
+    font-family: sans-serif;
+    text-decoration: none;
+}
+
+.location-list-items a:hover {
+    color: antiquewhite;
 }
 
 @media only screen and (max-width: 800px) {
@@ -262,6 +325,7 @@ h1, h3, #results-list {
 
     .hamburger {
         display: none;
+        z-index: 100;
     }
 
     #landing-btn {
