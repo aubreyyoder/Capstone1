@@ -7,7 +7,6 @@
         <title>Currency Conversion</title>
         <link href="https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz" rel="stylesheet">
         <link rel="stylesheet" href="style.css">
-        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
@@ -40,9 +39,25 @@
                 <div id="js-currency-exchange">
                     <ul class="old-currencies hidden">
                         <li class="instructional-item"><h1>WHICH CURRENCY ARE YOU CONVERTING FROM?</h1></li><br>
+                        <li class="currency"><button id="EUR" class="source-currency-btn" name="€" value="EUR">€ (EUR)</button></li>
+                        <li class="currency"><button id="JPY" class="source-currency-btn" name="¥"value="JPY">¥ (JPY)</button></li>
+                        <li class="currency"><button id="GBP" class="source-currency-btn" name="£" value="GBP">£ (GBP)</button></li>
+                        <li class="currency"><button id="CAD" class="source-currency-btn" name="$ (CAD)" value="CAD">$ (CAD)</button></li><br>
+                        <li class="currency"><button id="USD" class="source-currency-btn" name="$ (USD)" value="USD">$ (USD)</button></li>
+                        <li class="currency"><button id="NZD" class="source-currency-btn" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
+                        <li class="currency"><button id="MXN" class="source-currency-btn" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
+                        <li class="currency"><button id="AUD" class="source-currency-btn" name="$ (AUD)" value="AUD">$ (AUD)</button></li>
                     </ul>
                     <ul class="new-currencies hidden">
                         <li class="instructional-item"><h1>WHICH CURRENCY ARE YOU CONVERTING TO?</h1></li><br>
+                        <li class="currency"><button id="EUR" class="desired-currency-btn" name="€" value="EUR">€ (EUR)</button></li>
+                        <li class="currency"><button id="JPY" class="desired-currency-btn" name="¥"value="JPY">¥ (JPY)</button></li>
+                        <li class="currency"><button id="GBP" class="desired-currency-btn" name="£" value="GBP">£ (GBP)</button></li>
+                        <li class="currency"><button id="CAD" class="desired-currency-btn" name="$ (CAD)" value="CAD">$ (CAD)</button></li><br>
+                        <li class="currency"><button id="USD" class="desired-currency-btn" name="$ (USD)" value="USD">$ (USD)</button></li>
+                        <li class="currency"><button id="NZD" class="desired-currency-btn" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
+                        <li class="currency"><button id="MXN" class="desired-currency-btn" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
+                        <li class="currency"><button id="AUD" class="desired-currency-btn" name="$ (AUD)" value="AUD">$ (AUD)</button></li>
                     </ul>
                 </div>
             </section>
@@ -68,7 +83,7 @@
                     </div>
                     <div id="options">
                         <h3>FIND A BANK<br>TO CONVERT YOUR MONEY:</h3>
-                        <input id="zip-code-search" type="number" placeholder="Search zip code here"></input><br>
+                        <input id="zip-code-search" type="number" placeholder="Search zip code here" required></input><br>
                         <button id="find-bank-btn">&#127963;</button>
                         <h3>START NEW CURRENCY EXCHANGE SEARCH:</h3>
                         <button id="new-search-btn">&#127760;</button> 
@@ -88,6 +103,7 @@
                 <button id="js-find-bank-btn">&#127963;</button>
             </div>
         </section>
+        <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
         <script src="script.js"></script>
     </body>
 </html>

@@ -27,25 +27,13 @@ function navLocations() {
 }
 
 function hamburgerDropDown() {
-    $(document).ready(function() {
-        $('.hamburger').click(event => {
-            event.preventDefault();
-            $('.responsive-menu').toggle();
-        });
+    $('.hamburger').click(event => {
+        event.preventDefault();
+        $('.responsive-menu').toggle();
     });
 }
 
 function displayCurrencySelections() {
-    $('.old-currencies').append(
-        `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
-        <li class="currency"><button id="JPY" name="¥"value="JPY">¥ (JPY)</button></li>
-        <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
-        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li><br>
-        <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
-        <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
-        <li class="currency"><button id="MXN" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
-        <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
-    );
     $('.old-currencies').removeClass('hidden');
     $('button').on('click',function(event) {
         event.preventDefault();
@@ -68,16 +56,6 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
     $('.new-currencies').removeClass('hidden');
-    $('.new-currencies').append(
-        `<li class="currency"><button id="EUR" name="€" value="EUR">€ (EUR)</button></li>
-        <li class="currency"><button id="JPY" name="¥"value="JPY">¥ (JPY)</button></li>
-        <li class="currency"><button id="GBP" name="£" value="GBP">£ (GBP)</button></li>
-        <li class="currency"><button id="CAD" name="$ (CAD)" value="CAD">$ (CAD)</button></li><br>
-        <li class="currency"><button id="USD" name="$ (USD)" value="USD">$ (USD)</button></li>
-        <li class="currency"><button id="NZD" name="$ (NZD)" value="NZD">$ (NZD)</button></li>
-        <li class="currency"><button id="MXN" name="$ (HKD)" value="HKD">$ (HKD)</button></li>
-        <li class="currency"><button id="AUD" name="$ (AUD)" value="AUD">$ (AUD)</button></li>`
-    );
     $('button').on('click', function(event) {
         event.preventDefault();
         desiredCurrency = this.value;
@@ -87,6 +65,7 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
 }
 
 function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
+    $('.amount').addClass('hidden');
     $('#confirmation').removeClass('hidden');
     $('#js-confirmation').append(
         `<h1>${sourceCurrency} ${exchangeAmount} to ${desiredCurrency}</h1>
@@ -224,7 +203,12 @@ function displayLocationResults(responseJson) {
 function findBankEventListener() {
     $('#find-bank-btn').click(event => {
         event.preventDefault();
-        goToLocationPage();
+        if ($('#zip-code-search').val() >= 1) {
+            goToLocationPage();
+        } else {
+            alert(`MUST ENTER VALID ZIP CODE`)
+            $('.confirmation').addClass('hidden');
+        }
     })
 }
 
@@ -282,4 +266,4 @@ function handleFunction() {
     hamburgerDropDown();
 }
 
-$(handleFunction);
+$(document).ready(handleFunction);
