@@ -182,7 +182,7 @@ function getBankInfo(apiKey3, findBankInput) {
 function displayCurrencyResults(responseJson) {
     console.log(responseJson);
     $('#results-list').append(
-        `<li class="results-list-items">${desiredCurrency} ${responseJson.result}</li>`
+        `<li class="results-list-items">${responseJson.result}</li>`
     );
     $('.results').removeClass('hidden');
     newSearch();
@@ -208,8 +208,12 @@ function findBankEventListener() {
         if (zip >= 1 && /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)) {
             goToLocationPage();
         } else {
-            alert(`MUST ENTER VALID ZIP CODE`);
+            $('#js-error-message').text(`Must enter valid US zip code`);
             $('.amount').addClass('hidden');
+            $('#find-bank-btn').click(event => {
+                event.preventDefault();
+                goToLocationPage();
+            })
         }
     })
 }
