@@ -178,6 +178,11 @@ a:hover span:nth-child(4) {
     width: 80px;
 }
 
+#instructional-item h2 {
+    color: black;
+    font-size: 24px;
+}
+
 .instructional-item,
 #js-amount-input h1 {
     padding: 80px;

@@ -39,20 +39,11 @@ function displayCurrencySelections() {
         event.preventDefault();
         sourceCurrency = this.value;
         $('.old-currencies').addClass('hidden');
-        displayInputPage(sourceCurrency);
+        displayDesiredCurrencySelection(sourceCurrency);
     });
 }
 
-function displayInputPage(sourceCurrency) {
-    $('.amount').removeClass('hidden');
-    $('#submit').on('click', function(event) {
-        event.preventDefault();
-        exchangeAmount = document.getElementById("user-input-amount").value;
-        displayDesiredCurrencySelection(sourceCurrency, exchangeAmount);
-    })
-}
-
-function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
+function displayDesiredCurrencySelection(sourceCurrency) {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
     $('.new-currencies').removeClass('hidden');
@@ -60,15 +51,25 @@ function displayDesiredCurrencySelection(sourceCurrency, exchangeAmount) {
         event.preventDefault();
         desiredCurrency = this.value;
         $('.new-currencies').addClass('hidden');
-        displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency);
+        displayInputPage(sourceCurrency, desiredCurrency);
     });
+}
+
+function displayInputPage(sourceCurrency, desiredCurrency) {
+    $('.amount').removeClass('hidden');
+    $('#submit').on('click', function(event) {
+        event.preventDefault();
+        exchangeAmount = document.getElementById("user-input-amount").value;
+        displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency);
+    })
 }
 
 function displayConfirmation(sourceCurrency, exchangeAmount, desiredCurrency) {
     $('.amount').addClass('hidden');
     $('#confirmation').removeClass('hidden');
     $('#js-confirmation').append(
-        `<h1>${sourceCurrency} ${exchangeAmount} to ${desiredCurrency}</h1>
+        `<h2> IS THIS CORRECT?<h2>
+        <h1>${sourceCurrency} ${exchangeAmount} to ${desiredCurrency}</h1>
         <button id ="js-yes-btn" value="yes">YES</button>
         <button id="js-no-btn" value="no">NO</button>`
     );
@@ -203,11 +204,12 @@ function displayLocationResults(responseJson) {
 function findBankEventListener() {
     $('#find-bank-btn').click(event => {
         event.preventDefault();
-        if ($('#zip-code-search').val() >= 1) {
+        var zip = $('#zip-code-search').val();
+        if (zip >= 1 && /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zip)) {
             goToLocationPage();
         } else {
-            alert(`MUST ENTER VALID ZIP CODE`)
-            $('.confirmation').addClass('hidden');
+            alert(`MUST ENTER VALID ZIP CODE`);
+            $('.amount').addClass('hidden');
         }
     })
 }
