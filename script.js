@@ -35,7 +35,7 @@ function hamburgerDropDown() {
 
 function displayCurrencySelections() {
     $('.old-currencies').removeClass('hidden');
-    $('button').on('click',function(event) {
+    $('.source-currency-btn').on('click',function(event) {
         event.preventDefault();
         sourceCurrency = this.value;
         $('.old-currencies').addClass('hidden');
@@ -47,7 +47,7 @@ function displayDesiredCurrencySelection(sourceCurrency) {
     $('.amount').addClass('hidden');
     $('.old-currencies').addClass('hidden');
     $('.new-currencies').removeClass('hidden');
-    $('button').on('click', function(event) {
+    $('.desired-currency-btn').on('click', function(event) {
         event.preventDefault();
         desiredCurrency = this.value;
         $('.new-currencies').addClass('hidden');
