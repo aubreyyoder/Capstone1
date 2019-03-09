@@ -25,7 +25,7 @@
             </div>
         </header>
         <form id="conversion-form">
-            <section class="landing">
+            <section class="landing" role="landing">
                 <div id="js-show-me">
                     <a id="landing-btn" class="overflow" type="submit" href="#">SHOW ME THE MONEY
                         <span></span>
@@ -36,7 +36,7 @@
                 </div>
             </section>
         </form>
-            <section class="select-currency">
+            <section class="select-currency" role="currency-selector">
                 <div id="js-currency-exchange">
                     <ul class="old-currencies hidden">
                         <li class="instructional-item"><h1>WHICH CURRENCY ARE YOU CONVERTING</h1><h2> FROM?</h2></li><br>
@@ -63,7 +63,7 @@
                 </div>
             </section>
         <form id="amount-form">
-            <section class="amount hidden">
+            <section class="amount hidden" role="get-user-amount-input">
                 <div id="js-amount-input">
                     <h1>HOW MUCH ARE YOU CONVERTING?</h1>
                     <input id="user-input-amount" type="number" placeholder="HOW MUCH?" required></input>
@@ -71,14 +71,14 @@
                 </div>
             </section>
         </form>
-            <section id="confirmation" class="confirmation hidden">
+            <section id="confirmation" class="confirmation hidden" role="confirm-conversion">
                 <div id="js-confirmation">
                     <p id="confirmation-paragraph">
                     </p>
                 </div>
             </section>
         <form id="results-zip-form">
-            <section class="results hidden">
+            <section class="results hidden" role="show-results">
                 <div id="results-page">
                     <div id="js-conversion-results">
                         <ul id="results-list" name="results">
@@ -96,13 +96,13 @@
             </section>
         </form>
         <form id="locations-form">
-            <section class="locations hidden">
+            <section class="locations hidden" role="show-locations">
                 <div id="locations-page">
                     <ul id="locations-list">
                     </ul>
                 </div>
             </section>
-            <section class="find-bank hidden">
+            <section class="find-bank hidden" role="zip-search-only">
                 <div id="find-bank-page">
                     <input id="js-zip-code-search" type="number" placeholder="Search zip code here"></input><br>
                     <button id="js-find-bank-btn">&#127963;</button>
