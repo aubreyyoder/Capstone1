@@ -1,4 +1,7 @@
-# (CURRENCY CONVERSION)[https://aubreyyoder.github.io]
+# SHOW ME THE MONEY
+*Currency Conversion App*
+
+(https://aubreyyoder.github.io)
 
 
 
